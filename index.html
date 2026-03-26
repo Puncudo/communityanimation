@@ -812,11 +812,32 @@
     });
   }
 
+  function shrinkOut(cb) {
+    const fl=document.getElementById('figLeft'), fr=document.getElementById('figRight');
+    const fc=document.querySelector('.fig-center');
+    const base='position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;';
+    const trans='transition:transform 0.7s cubic-bezier(0.4,0,0.6,1),opacity 0.5s ease;';
+    // All three shrink toward center bottom (0,0 offset, scale 0)
+    fl.style.cssText = base + trans + `opacity:0;transform:translate(0px,0px) rotate(0deg) scale(0);`;
+    fr.style.cssText = base + trans + `opacity:0;transform:translate(0px,0px) rotate(0deg) scale(0);`;
+    // Center figure fades and shrinks via its wrapper
+    fc.style.transition = 'transform 0.7s cubic-bezier(0.4,0,0.6,1), opacity 0.5s ease';
+    fc.style.transformOrigin = 'bottom center';
+    fc.style.transform = 'scale(0)';
+    fc.style.opacity = '0';
+    setTimeout(cb, 800);
+  }
+
   function peekIn(cb) {
     const fl=document.getElementById('figLeft'), fr=document.getElementById('figRight');
+    const fc=document.querySelector('.fig-center');
     const lt=v('lt'),lx=v('lx'),ly=v('ly'),ls=v('ls');
     const rt=v('rt'),rx=v('rx'),ry=v('ry'),rs=v('rs');
     const base = 'position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;';
+    // Reset center figure visibility
+    fc.style.transition = 'none';
+    fc.style.transform = '';
+    fc.style.opacity = '1';
     fl.style.cssText = base + 'opacity:0;transform:translate(0px,10px) rotate(0deg) scale(0.3);transition:none;';
     fr.style.cssText = base + 'opacity:0;transform:translate(0px,10px) rotate(0deg) scale(0.3);transition:none;';
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -829,8 +850,13 @@
 
   function replay() {
     const fl=document.getElementById('figLeft'), fr=document.getElementById('figRight');
+    const fc=document.querySelector('.fig-center');
     const btn=document.getElementById('btnLogin');
     const base='position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;';
+    // Reset center figure
+    fc.style.transition = 'none';
+    fc.style.transform = '';
+    fc.style.opacity = '1';
     fl.style.cssText = base + 'opacity:0;transition:none;';
     fr.style.cssText = base + 'opacity:0;transition:none;';
     btn.style.opacity='1'; btn.style.transition='none';
@@ -855,6 +881,11 @@
             setTimeout(()=>{
               peekIn(()=>{
                 upd();
+                setTimeout(() => {
+                  shrinkOut(() => {
+                    setTimeout(replay, 300);
+                  });
+                }, 3000);
               });
             },200);
           });
