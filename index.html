@@ -103,6 +103,7 @@
       align-items: center;
       justify-content: center;
       transition: background 0.1s, transform 0.1s;
+      z-index: 7;
     }
     .btn-login:active {
       transform: translateX(-50%) scale(0.97);
@@ -198,11 +199,26 @@
 <body>
 <div class="phone">
   <div class="island"></div>
-  <div class="top-half">
-    <svg class="bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1170 2532" preserveAspectRatio="xMidYMin slice">
+  <div class="top-half" style="background:linear-gradient(135deg, #4cc7ec 0%, #1fb5fb 25%, #4389f7 60%, #5c6bf3 100%);">
+    <!-- Both circles in one SVG -->
+    <svg id="circles-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;pointer-events:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2152.17 2407.72" preserveAspectRatio="xMidYMin slice">
       <defs>
+        <linearGradient id="lg-right" x1="194.68" y1="1196.66" x2="-934.92" y2="1196.66" gradientTransform="translate(1714.01 3088.95) rotate(157.01)" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#a8c8ff"/>
+          <stop offset=".1" stop-color="#fff" stop-opacity=".82"/>
+          <stop offset=".33" stop-color="#fff" stop-opacity=".36"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".99" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="lg-left" x1="1680.8" y1="676.9" x2="531.94" y2="676.9" gradientTransform="translate(-466.37 -199.43) rotate(5.17)" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#a8c8ff"/>
+          <stop offset=".12" stop-color="#fff" stop-opacity=".84"/>
+          <stop offset=".46" stop-color="#fff" stop-opacity=".39"/>
+          <stop offset=".7" stop-color="#fff" stop-opacity=".11"/>
+          <stop offset=".81" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
         <style>
-          .st0{opacity:.3;stroke:url(#lg2);}.st0,.st1{fill:none;stroke-miterlimit:10;stroke-width:300px;}.st1{opacity:.6;stroke:url(#lg1);}.st2{fill:url(#lg);}
           @keyframes rotCircle1 {
             0%   { transform: rotate(-12deg) translate(0px,    0px);   }
             12%  { transform: rotate(9deg)   translate(-28px, -20px);  }
@@ -223,21 +239,14 @@
             90%  { transform: rotate(7deg)   translate(13px,  -15px);  }
             100% { transform: rotate(8deg)   translate(0px,    0px);   }
           }
-          .rot1 { transform-origin: 1389.6px 498.2px; animation: rotCircle1 32s ease-in-out infinite; }
-          .rot2 { transform-origin: 42px 139.5px;     animation: rotCircle2 41s ease-in-out infinite; }
+          .rot1 { transform-origin: 1587.25px 1842.8px; animation: rotCircle1 32s ease-in-out infinite; }
+          .rot2 { transform-origin: 574.46px 574.46px;  animation: rotCircle2 41s ease-in-out infinite; }
         </style>
-        <linearGradient id="lg" x1="2295.6" y1="1112.5" x2="121.3" y2="487.2" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#5d6ab1"/><stop offset=".2" stop-color="#5781c1"/><stop offset=".9" stop-color="#47afe4"/><stop offset="1" stop-color="#50c8ec"/>
-        </linearGradient>
-        <linearGradient id="lg1" x1="552.8" y1="1054.3" x2="-676.8" y2="1054.3" gradientTransform="translate(394.9 853) rotate(-113)" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#a8c8ff"/><stop offset=".1" stop-color="#fff" stop-opacity=".8"/><stop offset=".3" stop-color="#fff" stop-opacity=".4"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="lg2" x1="1546" y1="114" x2="453.7" y2="114" gradientTransform="translate(882.9 -413.3) rotate(140.2)" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#a8c8ff"/><stop offset=".1" stop-color="#fff" stop-opacity=".8"/><stop offset=".5" stop-color="#fff" stop-opacity=".4"/><stop offset=".7" stop-color="#fff" stop-opacity=".1"/><stop offset=".8" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
-        </linearGradient>
       </defs>
-      <path class="st2" d="M1171.9,1112.6c-199.9-42.5-372.1-26.1-546.2,79.9-132.5,80.7-414.3,106.9-623.8,46.1V3.7h1170v1108.9Z"/>
-      <g><circle class="st1 rot1" cx="1389.6" cy="498.2" r="464.8"/><circle class="st0 rot2" cx="42" cy="139.5" r="396.2"/></g>
+      <g>
+        <circle class="rot1" cx="1587.25" cy="1842.8" r="464.8" style="fill:none;opacity:.57;stroke:url(#lg-right);stroke-miterlimit:10;stroke-width:200px;"/>
+        <circle class="rot2" cx="574.46" cy="574.46" r="474.43" style="fill:none;opacity:.33;stroke:url(#lg-left);stroke-miterlimit:10;stroke-width:200px;"/>
+      </g>
     </svg>
   </div>
 
@@ -296,7 +305,13 @@
 
   </div>
 
+  <!-- White wave sits on top of circles, below text/buttons -->
+  <svg id="wave-svg" style="position:absolute;left:0;width:100%;z-index:4;pointer-events:none;display:block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 1000" preserveAspectRatio="none">
+    <path id="wave-path" fill="white" d="M390,20 C290,170 130,30 0,150 L0,1000 L390,1000 Z"/>
+  </svg>
+
   <div class="bottom-half">
+    <div id="txt-header" style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;color:#69a6d3;font-family:'Assistant',sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;bottom:310px;z-index:6;"></div>
     <div id="txt-subtitle" style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;color:#ffffff;font-family:'Heebo',sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;bottom:200px;z-index:6;">לשכה דיגיטלית</div>
     <div id="txt-title" style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;color:#4389F7;font-family:'Heebo',sans-serif;font-size:32px;font-weight:400;letter-spacing:0px;bottom:150px;z-index:6;">קהילות</div>
     <div id="logo-meitav" class="logo-wrap" style="width:222px;height:293px;bottom:300px;left:calc(50% - 111px);transform:scale(0.15);">
@@ -615,7 +630,16 @@
 </div>
 
 <div class="two-col">
-<div><div class="grp"><div class="grp-hd" style="border-left:3px solid #4389F7;">🏢 Meitav</div><div class="grp-body">
+<div><div class="grp"><div class="grp-hd" style="border-left:3px solid #4389F7;">✏️ Header</div><div class="grp-body">
+    <div class="cr"><span class="lbl">text</span><input type="text" id="hd-text" value="" oninput="upd()" style="flex:1;font-size:10px;border:1px solid #ddd;border-radius:4px;padding:2px 4px;direction:rtl;background:#fff;"></div>
+    <div class="cr"><span class="lbl">y from bot</span><input type="range" id="hd-y" min="0" max="844" step="1" value="310" oninput="syncSlider('hd-y')"><input type="number" id="hd-y-n" value="310" step="1" oninput="syncNum('hd-y')"></div>
+    <div class="cr"><span class="lbl">size</span><input type="range" id="hd-fs" min="8" max="120" step="1" value="18" oninput="syncSlider('hd-fs')"><input type="number" id="hd-fs-n" value="18" step="1" oninput="syncNum('hd-fs')"></div>
+    <div class="cr"><span class="lbl">spacing</span><input type="range" id="hd-ls" min="-20" max="30" step="0.5" value="0" oninput="syncSlider('hd-ls')"><input type="number" id="hd-ls-n" value="0" step="0.5" oninput="syncNum('hd-ls')"></div>
+    <div class="cr"><span class="lbl">weight</span><select id="hd-fw" onchange="upd()" style="flex:1;font-size:10px;border:1px solid #ddd;border-radius:4px;padding:2px;"><option value="100">100 Thin</option><option value="200">200 ExtraLight</option><option value="300">300 Light</option><option value="400" selected>400 Regular</option><option value="500">500 Medium</option><option value="600">600 SemiBold</option><option value="700">700 Bold</option><option value="800">800 ExtraBold</option><option value="900">900 Black</option></select></div>
+    <div class="cr"><span class="lbl">color</span><input type="color" id="c-hd" value="#69a6d3" oninput="syncColor('c-hd')"><input type="text" id="c-hd-hex" value="#69a6d3" oninput="syncHex('c-hd')" maxlength="7"></div>
+    <div class="cr"><span class="lbl">font</span><select id="hd-font" onchange="upd()" style="flex:1;font-size:10px;border:1px solid #ddd;border-radius:4px;padding:2px;"><option value="Heebo">Heebo</option><option value="Rubik">Rubik</option><option value="Assistant" selected>Assistant</option><option value="Secular One">Secular One</option><option value="Frank Ruhl Libre">Frank Ruhl Libre</option><option value="Noto Sans Hebrew">Noto Sans Hebrew</option></select></div>
+  </div></div>
+</div><div><div class="grp"><div class="grp-hd" style="border-left:3px solid #4389F7;">🏢 Meitav</div><div class="grp-body">
     <div class="cr"><span class="lbl">x</span><input type="range" id="mv-x" min="-195" max="195" step="1" value="116" oninput="syncSlider('mv-x')"><input type="number" id="mv-x-n" value="116" step="1" oninput="syncNum('mv-x')"></div>
     <div class="cr"><span class="lbl">y from bot</span><input type="range" id="mv-y" min="0" max="844" step="1" value="534" oninput="syncSlider('mv-y')"><input type="number" id="mv-y-n" value="534" step="1" oninput="syncNum('mv-y')"></div>
     <div class="cr"><span class="lbl">size</span><input type="range" id="mv-s" min="0.05" max="2.0" step="0.01" value="0.14" oninput="syncSlider('mv-s')"><input type="number" id="mv-s-n" value="0.14" step="0.01" oninput="syncNum('mv-s')"></div>
@@ -626,6 +650,18 @@
     <div class="cr"><span class="lbl">size</span><input type="range" id="sh-s" min="0.05" max="2.0" step="0.01" value="0.18" oninput="syncSlider('sh-s')"><input type="number" id="sh-s-n" value="0.18" step="0.01" oninput="syncNum('sh-s')"></div>
   </div></div>
 </div></div>
+<div class="one-col">
+<div class="grp"><div class="grp-hd" style="border-left:3px solid #7c6bf3;">⭕ Circles</div><div class="grp-body">
+    <div class="cr"><span class="lbl">x</span><input type="range" id="circ-x" min="-400" max="400" step="1" value="0" oninput="syncSlider('circ-x')"><input type="number" id="circ-x-n" value="0" step="1" oninput="syncNum('circ-x')"></div>
+    <div class="cr"><span class="lbl">y</span><input type="range" id="circ-y" min="-400" max="400" step="1" value="0" oninput="syncSlider('circ-y')"><input type="number" id="circ-y-n" value="0" step="1" oninput="syncNum('circ-y')"></div>
+    <div class="cr"><span class="lbl">scale</span><input type="range" id="circ-s" min="0.3" max="2.0" step="0.01" value="1" oninput="syncSlider('circ-s')"><input type="number" id="circ-s-n" value="1" step="0.01" oninput="syncNum('circ-s')"></div>
+  </div></div>
+</div>
+<div class="one-col">
+<div class="grp"><div class="grp-hd" style="border-left:3px solid #7c6bf3;">🌊 Wave</div><div class="grp-body">
+    <div class="cr"><span class="lbl">wave y</span><input type="range" id="bg-y" min="100" max="600" step="1" value="338" oninput="syncSlider('bg-y')"><input type="number" id="bg-y-n" value="338" step="1" oninput="syncNum('bg-y')"></div>
+  </div></div>
+</div>
 <div class="one-col">
 <div class="grp"><div class="grp-hd" style="border-left:3px solid #4389F7;">🔘 Button</div><div class="grp-body">
     <div class="cr"><span class="lbl">y from bot</span><input type="range" id="by" min="0" max="750" step="1" value="195" oninput="syncSlider('by')"><input type="number" id="by-n" value="195" step="1" oninput="syncNum('by')"></div>
@@ -657,8 +693,8 @@
 </div>
 
 <script>
-  const RANGE_IDS = ['gx','gy','gs','lt','lx','ly','ls','rt','rx','ry','rs','st-y','st-fs','st-ls','tt-y','tt-fs','tt-ls','by','bw','bh','br','bf','bls','b-sw','mv-x','mv-y','mv-s','sh-x','sh-y','sh-s'];
-  const COLOR_IDS = ['c-body','c-arms','c-st','c-tt','c-btn','c-btn-txt','c-btn-stroke','c-btn-press'];
+  const RANGE_IDS = ['gx','gy','gs','lt','lx','ly','ls','rt','rx','ry','rs','st-y','st-fs','st-ls','tt-y','tt-fs','tt-ls','hd-y','hd-fs','hd-ls','by','bw','bh','br','bf','bls','b-sw','mv-x','mv-y','mv-s','sh-x','sh-y','sh-s','vanish-y','circ-x','circ-y','circ-s','bg-y'];
+  const COLOR_IDS = ['c-body','c-arms','c-st','c-tt','c-hd','c-btn','c-btn-txt','c-btn-stroke','c-btn-press'];
   const SK = 'kahilot_v5';
 
   function getAllParams() {
@@ -672,6 +708,9 @@
     const tfw = document.getElementById('tt-fw'); if(tfw) d['tt-fw'] = tfw.value;
     const st = document.getElementById('st-text'); if(st) d['st-text'] = st.value;
     const tt = document.getElementById('tt-text'); if(tt) d['tt-text'] = tt.value;
+    const hd = document.getElementById('hd-text'); if(hd) d['hd-text'] = hd.value;
+    const hdf = document.getElementById('hd-font'); if(hdf) d['hd-font'] = hdf.value;
+    const hdfw = document.getElementById('hd-fw'); if(hdfw) d['hd-fw'] = hdfw.value;
     const bu = document.getElementById('b-underline'); if(bu) d['b-underline'] = bu.checked;
     return d;
   }
@@ -692,6 +731,9 @@
     const tfw = document.getElementById('tt-fw'); if(tfw && d['tt-fw']) tfw.value = d['tt-fw'];
     const st = document.getElementById('st-text'); if(st && d['st-text']) st.value = d['st-text'];
     const tt = document.getElementById('tt-text'); if(tt && d['tt-text']) tt.value = d['tt-text'];
+    const hd = document.getElementById('hd-text'); if(hd && d['hd-text'] !== undefined) hd.value = d['hd-text'];
+    const hdf = document.getElementById('hd-font'); if(hdf && d['hd-font']) hdf.value = d['hd-font'];
+    const hdfw = document.getElementById('hd-fw'); if(hdfw && d['hd-fw']) hdfw.value = d['hd-fw'];
     const bu = document.getElementById('b-underline'); if(bu && d['b-underline'] !== undefined) bu.checked = d['b-underline'];
   }
 
@@ -714,7 +756,7 @@
     markSaved();
   }
 
-  const DEFAULT_PARAMS = {"gx":"-10","gy":"-127","gs":"1.25","lt":"28","lx":"-40","ly":"-1","ls":"0.9","rt":"32","rx":"-30","ry":"-22","rs":"0.8","st-y":"765","st-fs":"21","st-ls":"0","tt-y":"252","tt-fs":"88","tt-ls":"-7","by":"196","bw":"240","bh":"42","br":"12","bf":"17","bls":"0.5","b-sw":"0.5","mv-x":"116","mv-y":"534","mv-s":"0.14","sh-x":"147","sh-y":"610","sh-s":"0.18","c-body":"#9cd1f2","c-arms":"#ffffff","c-st":"#ffffff","c-tt":"#69a6d3","c-btn":"#ffffff","c-btn-txt":"#69a6d3","c-btn-stroke":"#69a6d3","c-btn-press":"#2d6fd4","b-font":"Assistant","st-font":"Assistant","tt-font":"Rubik","st-fw":"400","tt-fw":"100","st-text":"לשכה דיגיטלית","tt-text":"קהילות","b-underline":false};
+  const DEFAULT_PARAMS = {"gx":"-10","gy":"-127","gs":"1.25","lt":"28","lx":"-40","ly":"-1","ls":"0.9","rt":"32","rx":"-30","ry":"-22","rs":"0.8","st-y":"761","st-fs":"25","st-ls":"0","tt-y":"204","tt-fs":"81","tt-ls":"-5","hd-y":"284","hd-fs":"34","hd-ls":"-0.5","by":"74","bw":"275","bh":"45","br":"7","bf":"16","bls":"0.5","b-sw":"0","mv-x":"115","mv-y":"534","mv-s":"0.14","sh-x":"147","sh-y":"610","sh-s":"0.18","circ-x":"79","circ-y":"-32","circ-s":"1.65","bg-y":"324","vanish-y":"0","c-body":"#9cd1f2","c-arms":"#ffffff","c-st":"#ffffff","c-tt":"#69a6d3","c-hd":"#2f305c","c-btn":"#2f305c","c-btn-txt":"#ffffff","c-btn-stroke":"#2f305c","c-btn-press":"#2d6fd4","b-font":"Noto Sans Hebrew","st-font":"Assistant","tt-font":"Rubik","hd-font":"Noto Sans Hebrew","st-fw":"400","tt-fw":"100","hd-fw":"700","st-text":"לשכה דיגיטלית","tt-text":"קהילות","hd-text":"ברוכים הבאים","b-underline":false};
 
   function load() {
     try {
@@ -825,6 +867,18 @@
     ttEl.style.fontFamily = `'${ttFont}',sans-serif`;
     loadFont(ttFont);
 
+    // Header (above title)
+    const hdEl = document.getElementById('txt-header');
+    const hdFont = document.getElementById('hd-font').value;
+    hdEl.textContent = document.getElementById('hd-text').value;
+    hdEl.style.bottom = v('hd-y')+'px';
+    hdEl.style.fontSize = v('hd-fs')+'px';
+    hdEl.style.letterSpacing = v('hd-ls')+'px';
+    hdEl.style.fontWeight = document.getElementById('hd-fw').value;
+    hdEl.style.color = c('c-hd');
+    hdEl.style.fontFamily = `'${hdFont}',sans-serif`;
+    loadFont(hdFont);
+
     const mvW = document.getElementById('logo-meitav');
     mvW.style.bottom   = v('mv-y') + 'px';
     mvW.style.left     = 'calc(50% - 111px + ' + v('mv-x') + 'px)';
@@ -834,6 +888,18 @@
     shW.style.bottom   = v('sh-y') + 'px';
     shW.style.left     = 'calc(50% - 115px + ' + v('sh-x') + 'px)';
     shW.style.transform = 'scale(' + v('sh-s') + ')';
+
+    // Circles SVG transform
+    const circSvg = document.getElementById('circles-svg');
+    if (circSvg) {
+      const cx = v('circ-x'), cy = v('circ-y'), cs = v('circ-s');
+      circSvg.style.transform = `translate(${cx}px, ${cy}px) scale(${cs})`;
+      circSvg.style.transformOrigin = 'center center';
+    }
+
+    // Background SVG y offset
+    const waveSvg = document.getElementById('wave-svg');
+    if (waveSvg) waveSvg.style.top = v('bg-y') + 'px';
 
     markUnsaved();
     const pOut = document.getElementById('params-out');
